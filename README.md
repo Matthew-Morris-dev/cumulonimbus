@@ -7,3 +7,5 @@ Rules:
   
 Popular demand:
   - Only branch is master branch.
+  - Only work in your unity scene until bringing it into main scene.
+  - Meantion when you are moving your work into the main scene.
