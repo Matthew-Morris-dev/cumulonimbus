@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //This game object survives scene changes
     public static GameManager gameManager;
 
-    public int playerScore;
+    public int playerScore; //The player score
 
-    private void Awake()
+    private void Awake()//deletes itself if another gamemanager already exists, otherwise this becomes the static gamemanager
     {
         if (gameManager == null)
         {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void AddToScore(int scoreAmount)
+    public void AddToScore(int scoreAmount) //Adds to the score
     {
         playerScore += scoreAmount;
     }
