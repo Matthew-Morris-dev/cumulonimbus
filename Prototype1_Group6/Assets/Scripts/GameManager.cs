@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,5 +36,11 @@ public class GameManager : MonoBehaviour
     public void AddToScore(int scoreAmount) //Adds to the score
     {
         playerScore += scoreAmount;
+    }
+
+    public void GameOver()
+    {
+        print("gg wp no re");
+        //SceneManager.SetActiveScene(); //Go to end scene
     }
 }

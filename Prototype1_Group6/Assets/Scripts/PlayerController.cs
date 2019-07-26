@@ -214,6 +214,17 @@ public class PlayerController : MonoBehaviour
         if (Input.anyKeyDown) //If a button is pressed, update the physical text display. More efficient than doing it every update
         {
             UpdatePlayerText();
+            if (cloudWord.Length > 0 && cloudWord.Length == playerTextInput.Length)//If the player answer is the same length as the actual answer
+            {
+                if (cloudWord == playerTextInput) //if the answer is correct
+                {
+                    WordCorrect();
+                }
+                else //if the answer is WRONG
+                {
+                    StartCoroutine(WordWrong());
+                }
+            }
         }
     }
 
@@ -224,8 +235,8 @@ public class PlayerController : MonoBehaviour
 
     void SpawnUnderscores(int numberOfUnderscores)//Spawns the VISUAL underscores. Positioning is based on the length of the word. !!NB Change the gap distance and middle position here!!
     {
-        Vector3 middleOfWordPos = new Vector3(0, 0, 0); //Where the middle of the word should be on screen
-        float gapSpace = 2; //How far one letter is from the next
+        Vector3 middleOfWordPos = new Vector3(0, -4.5f, 0); //Where the middle of the word should be on screen
+        float gapSpace = 2.4f; //How far one letter is from the next
         if (numberOfUnderscores%2 == 0)//if Even
         {
             middleOfWordPos -= Vector3.right * (numberOfUnderscores / 2 - 1) * gapSpace + Vector3.right * gapSpace * 0.5f; //Set the 'start' position of the first underscore (to be symmetrical)
@@ -304,8 +315,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator WordWrong() //A coroutine to run when the player gets the word wrong.
     {
         isTypingActive = false;
-        yield return new WaitForSeconds(2);
+        ColourAlphabet(1);
+        yield return new WaitForSeconds(0.5f);
+        playerTextInput = "";
+        UpdatePlayerText();
         isTypingActive = true;
+        print("Word is WRONG!");
     }
 
     void WordCorrect() //A method to run when the player gets the word right.
@@ -313,10 +328,44 @@ public class PlayerController : MonoBehaviour
         GameManager.gameManager.AddToScore(1);
         isTypingActive = false;
         //Play ding noise
-        //Maybe flash green
-        //Can make things move faster if you want
+        ColourAlphabet(2);
+        GameObject.Find("CloudSpawnerObj").GetComponent<CloudSpawnerScript>().SpeedUpCloud(5); //Dependant on a CloudSpawnerObject !!NB!! Change the speed value here!
+        print("Word is RIGHT!");
+        //yield return new WaitForSeconds(0.5f);
     }
 
-    
+    void ColourAlphabet(int choice) //0 for a white alphabet, 1 for a red alphabet, 2 for a green alphabet
+    {
+        switch (choice)
+        {
+            case 0: //White colour
+            for (int i = 0; i < alphabetArray.Length; i++)
+            {
+                    if (alphabetArray[i] != null)
+                    {
+                        alphabetArray[i].GetComponent<SpriteRenderer>().color = Color.white;
+                    }
+            }
+                break;
+            case 1: //Red colour
+                for (int i = 0; i < alphabetArray.Length; i++)
+                {
+                    if (alphabetArray[i] != null)
+                    {
+                        alphabetArray[i].GetComponent<SpriteRenderer>().color = Color.red;
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < alphabetArray.Length; i++)
+                {
+                    if (alphabetArray[i] != null)
+                    {
+                        alphabetArray[i].GetComponent<SpriteRenderer>().color = Color.green;
+                    }
+                }
+                break;
+        }
+    }
 
 }

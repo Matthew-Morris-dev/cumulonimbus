@@ -59,4 +59,9 @@ public class CloudSpawnerScript : MonoBehaviour
         print("ping");
     }
 
+    public void SpeedUpCloud(float speedMultiplier) //dependent on having an active cloud
+    {
+        activeCloud.GetComponent<CloudScript>().ShortenTravelTime(speedMultiplier);
+    }
+
 }

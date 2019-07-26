@@ -20,7 +20,7 @@ public class CloudScript : MonoBehaviour
         endPos = this.transform.parent.GetComponent<CloudSpawnerScript>().cloudEndLocation.transform.position;
 
         currLerp = 0;
-        lerpTime = 10;
+        lerpTime = 13;
         //lerpTime = (startPos - endPos).magnitude / moveSpeed; //How long it should take to reach the destination.
 
         GameObject.Find("PlayerControllerObj").GetComponent<PlayerController>().SetNewWord(cloudAnswerCAPS); //Give the playerController the new word
@@ -49,6 +49,11 @@ public class CloudScript : MonoBehaviour
     public void SetEndPos(Vector3 pos) //A public method to set the end lerp position (Unused I think)
     {
         endPos = pos;
+    }
+
+    public void ShortenTravelTime(float multiplier)
+    {
+        lerpTime = lerpTime / multiplier;
     }
 
 }
