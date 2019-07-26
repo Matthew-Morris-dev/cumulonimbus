@@ -35,9 +35,23 @@ public class MenuScript : MonoBehaviour
         Invoke("Quit", 0.5f);
     }
 
+    public void DelayedTutorial()
+    {
+        if (FadeEffect.instance != null)
+        {
+            FadeEffect.instance.FadeIn(0.5f);
+        }
+        Invoke("PlayTutorial", 0.5f);
+    }
+
+    public void PlayTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("MainScene");
     }
 
     public void Quit()
