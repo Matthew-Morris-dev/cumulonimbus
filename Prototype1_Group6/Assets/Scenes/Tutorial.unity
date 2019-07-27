@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScore: 0
+  totalGuesses: 0
 --- !u!65 &423187428
 BoxCollider:
   m_ObjectHideFlags: 0

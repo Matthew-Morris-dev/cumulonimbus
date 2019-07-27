@@ -8,8 +8,6 @@ public class LevelTimerScript : MonoBehaviour
     float levelMaxTime = 60; //in seconds !!NB!! The level length is set here
     float currLevelTime = 0;
 
-
-
     //STILL TO DO LIST: Sun and moon, Parallax background script.
     //In charge of how long the level lasts AND (probably) for rotating the sun/moon around
     // Start is called before the first frame update
