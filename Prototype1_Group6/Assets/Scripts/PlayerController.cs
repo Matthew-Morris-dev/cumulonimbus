@@ -25,14 +25,22 @@ public class PlayerController : MonoBehaviour
     private int stage = 1;
     [SerializeField]
     private CloudScript cloud;
+    [SerializeField]
+    private HowToPlayController HTPC;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (howToPlay && cloud == null)
+        if (howToPlay)
         {
-            Debug.LogError("we are attempting to find cloud");
-            cloud = FindObjectOfType<CloudScript>();
+            if (cloud == null)
+            {
+                cloud = FindObjectOfType<CloudScript>();
+            }
+            if (HTPC == null)
+            {
+                HTPC = FindObjectOfType<HowToPlayController>();
+            }
         }
     }
 
@@ -43,8 +51,11 @@ public class PlayerController : MonoBehaviour
         {
             if (cloud == null)
             {
-                //Debug.LogError("we are attempting to find cloud");
                 cloud = FindObjectOfType<CloudScript>();
+            }
+            if (HTPC == null)
+            {
+                HTPC = FindObjectOfType<HowToPlayController>();
             }
             else
             {
@@ -53,6 +64,7 @@ public class PlayerController : MonoBehaviour
                     //we enter stage 1
                     //Debug.LogWarning("We enter stage 1");
                     Time.timeScale = 0f;
+                    HTPC.RenderKeyboard(stage);
                     if (Input.GetKeyDown(KeyCode.C))
                     {
                         playerTextInput += 'C';
@@ -60,11 +72,13 @@ public class PlayerController : MonoBehaviour
                         //Debug.LogWarning("Player pressed c");
                         stage = 2;
                         Time.timeScale = 1f;
+                        HTPC.RenderKeyboard(0);
                     }
                 }
                 else if ((stage == 2) && GetCloudPosition(cloud) <= (Screen.width * 0.5))
                 {
                     Time.timeScale = 0f;
+                    HTPC.RenderKeyboard(stage);
                     if (Input.GetKeyDown(KeyCode.A))
                     {
                         playerTextInput += 'A';
@@ -72,11 +86,13 @@ public class PlayerController : MonoBehaviour
                         //Debug.LogWarning("Player pressed a");
                         stage = 3;
                         Time.timeScale = 1f;
+                        HTPC.RenderKeyboard(0);
                     }
                 }
                 else if ((stage == 3) && GetCloudPosition(cloud) <= (Screen.width * 0.25))
                 {
                     Time.timeScale = 0f;
+                    HTPC.RenderKeyboard(stage);
                     if (Input.GetKeyDown(KeyCode.T))
                     {
                         playerTextInput += 'T';
@@ -84,6 +100,7 @@ public class PlayerController : MonoBehaviour
                         //Debug.LogWarning("Player pressed t");
                         stage = 4;
                         Time.timeScale = 1f;
+                        HTPC.RenderKeyboard(0);
                     }
                     if (cloudWord.Length > 0 && cloudWord.Length == playerTextInput.Length)//If the player answer is the same length as the actual answer
                     {
