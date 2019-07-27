@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private HowToPlayController HTPC;
 
+    //Pause menu stuff
+    private bool paused = false;
+    [SerializeField]
+    private GameObject pauseMenuUI;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +71,7 @@ public class PlayerController : MonoBehaviour
                     //Debug.LogWarning("We enter stage 1");
                     Time.timeScale = 0f;
                     HTPC.RenderKeyboard(stage);
-                    if (Input.GetKeyDown(KeyCode.C))
+                    if (Input.GetKeyDown(KeyCode.C) && !paused)
                     {
                         playerTextInput += 'C';
                         UpdatePlayerText();
@@ -79,7 +85,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Time.timeScale = 0f;
                     HTPC.RenderKeyboard(stage);
-                    if (Input.GetKeyDown(KeyCode.A))
+                    if (Input.GetKeyDown(KeyCode.A) && !paused)
                     {
                         playerTextInput += 'A';
                         UpdatePlayerText();
@@ -93,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Time.timeScale = 0f;
                     HTPC.RenderKeyboard(stage);
-                    if (Input.GetKeyDown(KeyCode.T))
+                    if (Input.GetKeyDown(KeyCode.T) && !paused)
                     {
                         playerTextInput += 'T';
                         UpdatePlayerText();
@@ -125,12 +131,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (isTypingActive)
+            if (isTypingActive && !paused)
             {
                 AcceptInput();
             }
         }
         //print(playerTextInput);
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePaused();
+        }
     }
 
     void AcceptInput() //The method to accept player input. Letters and Backspace/Enter are valid inputs.
@@ -484,5 +494,29 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    #endregion
+
+    #region PauseMenu Scripts
+
+    public void TogglePaused()
+    {
+        if(paused)
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            paused = false;
+        }
+        else
+        {
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            paused = true;
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     #endregion
 }
