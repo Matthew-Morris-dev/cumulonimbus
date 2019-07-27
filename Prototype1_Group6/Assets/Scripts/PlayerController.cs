@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     GameObject[] alphabetArray = new GameObject[10]; //The gameobject array that VISUALLY displays the player text. Relies on underscore position.
     GameObject[] correctWordArray = new GameObject[10]; //The gameobject array that VISUALLY displays the correct word.
 
+    //audio stuff
+    public AudioClip WordCorrectAudio;
+    public AudioClip WordIncorrectAudio;
+    public SoundController sc;
 
     //how to play stuff
     [SerializeField]
@@ -428,6 +432,7 @@ public class PlayerController : MonoBehaviour
     {
         isTypingActive = false;
         ColourAlphabet(1);
+        sc.Playone(1, WordIncorrectAudio);
         yield return new WaitForSeconds(0.5f);
         playerTextInput = "";
         UpdatePlayerText();
@@ -441,6 +446,7 @@ public class PlayerController : MonoBehaviour
         isTypingActive = false;
         //Play ding noise
         ColourAlphabet(2);
+        sc.Playone(1, WordCorrectAudio);
         GameObject.Find("CloudSpawnerObj").GetComponent<CloudSpawnerScript>().SpeedUpCloud(5); //Dependant on a CloudSpawnerObject !!NB!! Change the speed value here!
         print("Word is RIGHT!");
         //yield return new WaitForSeconds(0.5f);

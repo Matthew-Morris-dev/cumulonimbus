@@ -1269,6 +1269,10 @@ MonoBehaviour:
   BlackScreen: {fileID: 2143249580}
   BodyText: {fileID: 1580978104}
   FadeTime: 2
+  goodGameAudio: {fileID: 8300000, guid: 11004302f9321db4c9a0b3d4d32dcdd1, type: 3}
+  badGameAudio: {fileID: 8300000, guid: b82f74439110fa24cb0f8591e9d8a6f6, type: 3}
+  menuAudio: {fileID: 8300000, guid: 29c8a752bbc221641ac73386b14973b2, type: 3}
+  sc: {fileID: 1030088224}
 --- !u!4 &1417772488
 Transform:
   m_ObjectHideFlags: 0

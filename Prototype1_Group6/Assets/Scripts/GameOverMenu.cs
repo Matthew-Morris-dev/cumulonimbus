@@ -11,13 +11,19 @@ public class GameOverMenu : MonoBehaviour
     public Text BodyText;
     public float FadeTime;
 
+    //audio
+    public AudioClip goodGameAudio;
+    public AudioClip badGameAudio;
+    public AudioClip menuAudio;
+    public SoundController sc;
+
     private bool displayed = false;
     private GameManager gm;
     void Start()
     {
         BlackScreen.canvasRenderer.SetAlpha(1f);
         FadeOut(FadeTime);
-        
+        sc.PlayBG(menuAudio);
     }
 
     // Update is called once per frame
@@ -55,10 +61,12 @@ public class GameOverMenu : MonoBehaviour
         if(factorCorrect > 0.5f)
         {
             BodyText.text = "Congratulations, you got " + correct + " out of " + total + " correct!";
+            sc.Playone(1, goodGameAudio);
         }
         else
         {
             BodyText.text = "You got " + correct + " out of " + total + " correct! Better luck next time.";
+            sc.Playone(1, badGameAudio);
         }
     }
 

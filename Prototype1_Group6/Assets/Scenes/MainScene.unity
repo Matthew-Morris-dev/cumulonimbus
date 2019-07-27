@@ -961,6 +961,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873587794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1313173444, guid: 2ee3324deb1206040a74fb4122a4e0c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6681899591595276722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f5b72ec33128049a8818883baca8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1119496422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,6 +2335,9 @@ MonoBehaviour:
   - {fileID: 6937033758970949232, guid: 0b57b4446745be045ae2982c0ba54630, type: 3}
   - {fileID: 9126638256768248114, guid: 0ccc7e61fd123834c855c9e172bdc09b, type: 3}
   - {fileID: 7823879590555858561, guid: 4f2de27923ad9d343ac0315ee5b4880c, type: 3}
+  WordCorrectAudio: {fileID: 8300000, guid: 8e4753266802f364183505bd5477b8c5, type: 3}
+  WordIncorrectAudio: {fileID: 8300000, guid: db0e5b040c876f9408dbde9a21a6a06d, type: 3}
+  sc: {fileID: 873587794}
   howToPlay: 0
   stage: 1
   cloud: {fileID: 0}
