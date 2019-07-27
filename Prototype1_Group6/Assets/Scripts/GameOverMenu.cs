@@ -11,19 +11,27 @@ public class GameOverMenu : MonoBehaviour
     public Text BodyText;
     public float FadeTime;
 
+    private bool displayed = false;
+    private GameManager gm;
     void Start()
     {
         BlackScreen.canvasRenderer.SetAlpha(1f);
         FadeOut(FadeTime);
-
-        //used for debugging
-        //DisplayGameOverMessage(5, 10);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(gm == null)
+        {
+            gm = FindObjectOfType<GameManager>();
+        }
+        else if(!displayed)
+        {
+            DisplayGameOverMessage(gm.playerScore, gm.totalGuesses);
+            displayed = true;
+        }
     }
 
     //fade into black

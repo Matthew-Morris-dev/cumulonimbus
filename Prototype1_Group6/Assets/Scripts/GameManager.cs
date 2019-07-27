@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(this);
     }
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         print("gg wp no re");
-        SceneManager.LoadScene(2); //Go to end scene
+        SceneManager.LoadScene("GameOverScene"); //Go to end scene
     }
 }
