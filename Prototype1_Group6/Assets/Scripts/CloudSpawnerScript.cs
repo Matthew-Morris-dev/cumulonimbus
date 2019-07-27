@@ -13,7 +13,8 @@ public class CloudSpawnerScript : MonoBehaviour
 
     public GameObject cloudSpawnPosition; //The gameobject that sets the cloud spawn position   NB: How long the cloud remains on screen can be set on the CloudScript
     public GameObject cloudEndLocation; //The gameobject that sets the cloud destination
-    
+
+    bool isLastCloud = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,11 @@ public class CloudSpawnerScript : MonoBehaviour
             {
                 SpawnNewCloud(Random.Range(0, cloudObjArrSize));
             }
+            else
+            {
+                GameManager.gameManager.GameOver();
+
+            }
         }
     }
 
@@ -40,6 +46,10 @@ public class CloudSpawnerScript : MonoBehaviour
         isCloudActive = true;
         activeCloud.transform.parent = this.gameObject.transform; //(sets this as the parent of the cloud so CloudScript can easily access this script)
         DeleteFromCloudObjArr(cloudID);
+        if (cloudObjArrSize <= 0)
+        {
+            isLastCloud = true;
+        }
     }
 
     void DeleteFromCloudObjArr(int deleteID) //Removes the element from the array (but not really because we're using an array and not a list >_<)
@@ -62,6 +72,11 @@ public class CloudSpawnerScript : MonoBehaviour
     public void SpeedUpCloud(float speedMultiplier) //dependent on having an active cloud
     {
         activeCloud.GetComponent<CloudScript>().ShortenTravelTime(speedMultiplier);
+    }
+
+    public void ClearCloudArrSize() //Sets the cloud arr size to zero (thus ending the game after the last cloud)
+    {
+        cloudObjArrSize = 0;
     }
 
 }

@@ -20,6 +20,7 @@ public class StartEndCloudDetectorScript : MonoBehaviour
             else //if is the ending collider
             {
                 GameObject.Find("PlayerControllerObj").GetComponent<PlayerController>().CancelInput(); //Deactivates typing AND disables the underscores etc.
+                GameManager.gameManager.totalGuesses++;
                 print("General Cloudnobi");
             }
         }

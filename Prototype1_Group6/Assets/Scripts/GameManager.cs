@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
 
     public int playerScore; //The player score
+    public int totalGuesses;
 
     private void Awake()//deletes itself if another gamemanager already exists, otherwise this becomes the static gamemanager
     {
@@ -41,6 +42,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         print("gg wp no re");
-        //SceneManager.SetActiveScene(); //Go to end scene
+        SceneManager.LoadScene(2); //Go to end scene
     }
 }
