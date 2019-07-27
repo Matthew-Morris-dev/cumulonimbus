@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,18 +17,101 @@ public class PlayerController : MonoBehaviour
     GameObject[] underscoreArray = new GameObject[10]; //The gameobject array that VISUALLY displays the underscores.
     GameObject[] alphabetArray = new GameObject[10]; //The gameobject array that VISUALLY displays the player text. Relies on underscore position.
 
+
+    //how to play stuff
+    [SerializeField]
+    private bool howToPlay = false;
+    [SerializeField]
+    private int stage = 1;
+    [SerializeField]
+    private CloudScript cloud;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (howToPlay && cloud == null)
+        {
+            Debug.LogError("we are attempting to find cloud");
+            cloud = FindObjectOfType<CloudScript>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isTypingActive)
+        if (howToPlay)
         {
-            AcceptInput();
+            if (cloud == null)
+            {
+                //Debug.LogError("we are attempting to find cloud");
+                cloud = FindObjectOfType<CloudScript>();
+            }
+            else
+            {
+                if ((stage == 1) && GetCloudPosition(cloud) <= (Screen.width * 0.75))
+                {
+                    //we enter stage 1
+                    //Debug.LogWarning("We enter stage 1");
+                    Time.timeScale = 0f;
+                    if (Input.GetKeyDown(KeyCode.C))
+                    {
+                        playerTextInput += 'C';
+                        UpdatePlayerText();
+                        //Debug.LogWarning("Player pressed c");
+                        stage = 2;
+                        Time.timeScale = 1f;
+                    }
+                }
+                else if ((stage == 2) && GetCloudPosition(cloud) <= (Screen.width * 0.5))
+                {
+                    Time.timeScale = 0f;
+                    if (Input.GetKeyDown(KeyCode.A))
+                    {
+                        playerTextInput += 'A';
+                        UpdatePlayerText();
+                        //Debug.LogWarning("Player pressed a");
+                        stage = 3;
+                        Time.timeScale = 1f;
+                    }
+                }
+                else if ((stage == 3) && GetCloudPosition(cloud) <= (Screen.width * 0.25))
+                {
+                    Time.timeScale = 0f;
+                    if (Input.GetKeyDown(KeyCode.T))
+                    {
+                        playerTextInput += 'T';
+                        UpdatePlayerText();
+                        //Debug.LogWarning("Player pressed t");
+                        stage = 4;
+                        Time.timeScale = 1f;
+                    }
+                    if (cloudWord.Length > 0 && cloudWord.Length == playerTextInput.Length)//If the player answer is the same length as the actual answer
+                    {
+                        if (cloudWord == playerTextInput) //if the answer is correct
+                        {
+                            WordCorrect();
+                        }
+                        else //if the answer is WRONG
+                        {
+                            StartCoroutine(WordWrong());
+                        }
+                    }
+                }
+                else
+                {
+                    if(GetCloudPosition(cloud) < 0f)
+                    {
+                        Invoke("EndHowToPlay", 0.25f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (isTypingActive)
+            {
+                AcceptInput();
+            }
         }
         //print(playerTextInput);
     }
@@ -368,4 +452,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    #region HowToPlay Scripts
+
+    private float GetCloudPosition(CloudScript obj)
+    {
+        Debug.LogError(Camera.main.WorldToScreenPoint(obj.transform.position));
+        Vector3 Pos = Camera.main.WorldToScreenPoint(obj.transform.position);
+        return Pos.x;
+    }
+    
+    private void EndHowToPlay()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    #endregion
 }
