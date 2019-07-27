@@ -19,6 +19,7 @@ public class StartEndCloudDetectorScript : MonoBehaviour
             }
             else //if is the ending collider
             {
+                GameObject.Find("PlayerControllerObj").GetComponent<PlayerController>().DisplayCorrectWord(); //Goes to a method that checks if the answer was wrong, then displays the correct answer if so
                 GameObject.Find("PlayerControllerObj").GetComponent<PlayerController>().CancelInput(); //Deactivates typing AND disables the underscores etc.
                 GameManager.gameManager.totalGuesses++;
                 print("General Cloudnobi");

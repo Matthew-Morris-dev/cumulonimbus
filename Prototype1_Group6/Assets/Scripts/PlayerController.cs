@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject[] underscoreArray = new GameObject[10]; //The gameobject array that VISUALLY displays the underscores.
     GameObject[] alphabetArray = new GameObject[10]; //The gameobject array that VISUALLY displays the player text. Relies on underscore position.
+    GameObject[] correctWordArray = new GameObject[10]; //The gameobject array that VISUALLY displays the correct word.
 
 
     //how to play stuff
@@ -479,6 +480,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void DisplayCorrectWord() //Checks if the answer is wrong (aka the player can still type), then displays the word for a little
+    {
+        if (isTypingActive)
+        {
+            float distanceAboveUnderscore = 7f;
+            for (int i = 0; i < cloudWord.Length; i++)
+            {
+                correctWordArray[i] = Instantiate(alphabetPrefabArr[cloudWord[i] - 65], underscoreArray[i].transform.position + Vector3.up * distanceAboveUnderscore, Quaternion.identity);
+                //if (Time.timeSinceLevelLoad > 40)
+                correctWordArray[i].GetComponent<SpriteRenderer>().color = Color.grey;
+                Destroy(correctWordArray[i], 2f);
+            }
+        }
+    }
 
     #region HowToPlay Scripts
 
