@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     string playerTextInput = ""; //Stores the current typed input from the player. Is cleared on a new word.
     string cloudWord = ""; //The word of the cloud; the desired answer to get
-    bool isTypingActive = true; //Whether or not the player is allowed to type. Disabled when no word is currently present.
+    bool isTypingActive = false; //Whether or not the player is allowed to type. Disabled when no word is currently present.
 
     float horizontalLevelSpace = 18; //The screen size in units. Currently unused.
 
@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour
         {
             TogglePaused();
         }
+        print(isTypingActive);
     }
 
     void AcceptInput() //The method to accept player input. Letters and Backspace/Enter are valid inputs.
@@ -172,157 +173,183 @@ public class PlayerController : MonoBehaviour
         { //All 26 input letters under this if
             if (Input.GetKeyDown(KeyCode.A))
             {
-                playerTextInput += 'A';
+                if (playerTextInput.Length < cloudWord.Length) //Yes I know this is a double check but I need it as a temporary measure to fix the 'SPAM THA KEYBOARD' bug
+                    playerTextInput += 'A';
 
             }
 
             if (Input.GetKeyDown(KeyCode.B))
             {
-                playerTextInput += 'B';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'B';
 
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                playerTextInput += 'C';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'C';
 
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
-                playerTextInput += 'D';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'D';
 
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                playerTextInput += 'E';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'E';
 
             }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                playerTextInput += 'F';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'F';
 
             }
 
             if (Input.GetKeyDown(KeyCode.G))
             {
-                playerTextInput += 'G';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'G';
 
             }
 
             if (Input.GetKeyDown(KeyCode.H))
             {
-                playerTextInput += 'H';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'H';
 
             }
 
             if (Input.GetKeyDown(KeyCode.I))
             {
-                playerTextInput += 'I';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'I';
 
             }
 
             if (Input.GetKeyDown(KeyCode.J))
             {
-                playerTextInput += 'J';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'J';
 
             }
 
             if (Input.GetKeyDown(KeyCode.K))
             {
-                playerTextInput += 'K';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'K';
 
             }
 
             if (Input.GetKeyDown(KeyCode.L))
             {
-                playerTextInput += 'L';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'L';
 
             }
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                playerTextInput += 'M';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'M';
 
             }
 
             if (Input.GetKeyDown(KeyCode.N))
             {
-                playerTextInput += 'N';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'N';
 
             }
 
             if (Input.GetKeyDown(KeyCode.O))
             {
-                playerTextInput += 'O';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'O';
 
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                playerTextInput += 'P';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'P';
 
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                playerTextInput += 'Q';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'Q';
 
             }
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                playerTextInput += 'R';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'R';
 
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
-                playerTextInput += 'S';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'S';
 
             }
 
             if (Input.GetKeyDown(KeyCode.T))
             {
-                playerTextInput += 'T';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'T';
 
             }
 
             if (Input.GetKeyDown(KeyCode.U))
             {
-                playerTextInput += 'U';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'U';
 
             }
 
             if (Input.GetKeyDown(KeyCode.V))
             {
-                playerTextInput += 'V';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'V';
 
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
-                playerTextInput += 'W';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'W';
 
             }
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                playerTextInput += 'X';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'X';
 
             }
 
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                playerTextInput += 'Y';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'Y';
 
             }
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                playerTextInput += 'Z';
+                if (playerTextInput.Length < cloudWord.Length)
+                    playerTextInput += 'Z';
 
             }
         }
@@ -436,7 +463,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         playerTextInput = "";
         UpdatePlayerText();
-        isTypingActive = true;
+        if (underscoreArray[0] != null)
+            isTypingActive = true;
         print("Word is WRONG!");
     }
 
